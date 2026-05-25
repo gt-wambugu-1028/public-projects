@@ -1,3 +1,4 @@
+// devcontainer.json
 {
   "name": "Default Dev Container",
   "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
@@ -10,15 +11,15 @@
       "installJupyterlab": true,
     },
     "ghcr.io/devcontainers/features/rust:1": {
-      "components": ["rustfmt", "clippy"], // To research
+      // "components": ["rustfmt", "clippy"], // To research
     },
     "ghcr.io/devcontainers/features/node:2": {},
     "ghcr.io/devcontainers/features/docker-in-docker:3": {
-      // "dockerDefaultAddressPool": ""
+      "moby": false,
     },
   },
-  "customizations": {
-    "": {},
-  },
   "postCreateCommand": "curl -LsSf https://astral.sh/uv/install.sh | sh",
+  "postStartCommand": "python3 --version",
+  // "RunArgs": ["--env-file", "<PATH_TO_ENV_FILE>"]
+  // "mounts": ["source=,target=,type=,consistency="]
 }
