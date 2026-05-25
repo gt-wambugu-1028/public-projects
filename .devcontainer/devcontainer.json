@@ -1,7 +1,10 @@
 // devcontainer.json
 {
   "name": "Default Dev Container",
+  // "dockerComposeFile": "[<Docker Compose file path>]",
+  // "service": "",
   "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "shutdownAction": "StopContainer", // StopContainer, StopCompose, None
   "features": {
     "ghcr.io/devcontainers/features/git:1": {},
     "ghcr.io/devcontainers/features/python:1": {
@@ -20,6 +23,7 @@
   },
   "postCreateCommand": "curl -LsSf https://astral.sh/uv/install.sh | sh",
   "postStartCommand": "python3 --version",
+  // "workspaceFolder": "",
   // "RunArgs": ["--env-file", "<PATH_TO_ENV_FILE>"]
   // "mounts": ["source=,target=,type=,consistency="]
 }
