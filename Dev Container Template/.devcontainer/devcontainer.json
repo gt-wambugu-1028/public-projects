@@ -51,6 +51,7 @@
     "443": { "label": "HTTPS", "onAutoForward": "silent" },
   },
   "postCreateCommand": [
+    "sudo apt install -y gh",
     "npm install -g @anthropic-ai/claude-code",
     "curl -fsSL https://raw.githubusercontent.com/JuliusBrussee/caveman/main/install.sh | bash",
     "uv tool install graphifyy",
