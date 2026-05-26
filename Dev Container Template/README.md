@@ -81,3 +81,4 @@ A custom development container template with pre-configured tools and settings. 
 ```
 
 - `overrideFeatureInstallOrder` used to guarantee a specific order of feature installation
+- installing `uv` and `pyenv` as Python tools results in an error during feature installation - `pyenv` manages Python versions by compiling from source; `uv` has no concept of it and errors out when the python feature tries to install both via `uv`.
