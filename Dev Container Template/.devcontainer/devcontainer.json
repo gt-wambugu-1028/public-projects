@@ -1,0 +1,69 @@
+// devcontainer.json
+{
+  // "name": "",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "shutdownAction": "StopContainer", // StopContainer, StopCompose, None
+  "features": {
+    "ghcr.io/devcontainers/features/node:2": {
+      "npmVersion": "latest",
+      "installYarnUsingApt": true,
+    },
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.14",
+      "installTools": true,
+      "toolsToInstall": [
+        "uv",
+        "pyenv",
+        "ruff",
+        "ty",
+        "pytest",
+        "py-spy",
+        "line_profiler",
+        "ipython",
+        "mkdocs",
+        "bandit",
+        "pre-commit",
+        "invoke",
+        "cookiecutter",
+        "pipx",
+        "pyinstaller",
+      ], // https://realpython.com/ref/tools/
+      "installJupyterlab": true,
+    },
+    "ghcr.io/devcontainers/features/rust:1": {
+      "components": [
+        "rustc",
+        "cargo",
+        "rustfmt",
+        "rust-std",
+        "rust-docs",
+        "rust-src",
+        "rust-analyzer",
+        "clippy",
+      ],
+    },
+    "ghcr.io/devcontainers/features/docker-in-docker:3": {
+      "moby": false,
+    },
+  },
+  "forwardPorts": [443],
+  "portsAttributes": {
+    "443": { "label": "HTTPS", "onAutoForward": "silent" },
+  },
+  "postCreateCommand": [
+    "npm install -g @anthropic-ai/claude-code",
+    "curl -fsSL https://raw.githubusercontent.com/JuliusBrussee/caveman/main/install.sh | bash",
+    "uv tool install graphifyy",
+  ],
+  "postStartCommand": "sudo apt update && sudo apt upgrade",
+  "mounts": [
+    "source=${localEnv:USERPROFILE}/.gitconfig,target=/root/.gitconfig,type=bind,consistency=cached",
+    "source=${localEnv:USERPROFILE}/.git-credentials,target=/root/.git-credentials,type=bind,consistency=cached",
+    "source=${localEnv:USERPROFILE}/.claude,target=/root/.claude,type=bind,consistency=cached",
+  ],
+  // "RunArgs": ["--env-file", "<PATH_TO_ENV_FILE>"]
+  // "workspaceMount": "source=,target=,type=,consistency="
+  // "workspaceFolder": "<workspaceMountTarget>",
+  // "dockerComposeFile": "[<Docker Compose file path>]",
+  // "service": "",
+}
