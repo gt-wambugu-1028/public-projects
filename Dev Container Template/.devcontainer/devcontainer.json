@@ -1,8 +1,8 @@
 // devcontainer.json
 {
-  // "name": "",
+  // "name": "test",
   "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
-  "shutdownAction": "StopContainer", // StopContainer, StopCompose, None
+  "shutdownAction": "stopContainer",
   "features": {
     "ghcr.io/devcontainers/features/node:2": {
       "npmVersion": "latest",
@@ -11,36 +11,11 @@
     "ghcr.io/devcontainers/features/python:1": {
       "version": "3.14",
       "installTools": true,
-      "toolsToInstall": [
-        "uv",
-        "pyenv",
-        "ruff",
-        "ty",
-        "pytest",
-        "py-spy",
-        "line_profiler",
-        "ipython",
-        "mkdocs",
-        "bandit",
-        "pre-commit",
-        "invoke",
-        "cookiecutter",
-        "pipx",
-        "pyinstaller",
-      ], // https://realpython.com/ref/tools/
+      "toolsToInstall": "uv,pyenv,ruff,ty,pytest,py-spy,line_profiler,ipython,mkdocs,bandit,pre-commit,invoke,cookiecutter,pipx,pyinstaller",
       "installJupyterlab": true,
     },
     "ghcr.io/devcontainers/features/rust:1": {
-      "components": [
-        "rustc",
-        "cargo",
-        "rustfmt",
-        "rust-std",
-        "rust-docs",
-        "rust-src",
-        "rust-analyzer",
-        "clippy",
-      ],
+      "components": "rustc,cargo,rustfmt,rust-std,rust-docs,rust-src,rust-analyzer,clippy",
     },
     "ghcr.io/devcontainers/features/docker-in-docker:3": {
       "moby": false,
