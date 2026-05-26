@@ -31,12 +31,12 @@
   "portsAttributes": {
     "443": { "label": "HTTPS", "onAutoForward": "silent" },
   },
-  "postCreateCommand": "sudo apt install -y gh && uv tool install graphifyy && curl -fsSL https://raw.githubusercontent.com/JuliusBrussee/caveman/main/install.sh | bash",
+  "postCreateCommand": "npm install -g @anthropic-ai/claude-code && curl -fsSL https://raw.githubusercontent.com/JuliusBrussee/caveman/main/install.sh | bash && uv tool install graphifyy",
   "postStartCommand": "sudo apt update && sudo apt upgrade",
   "mounts": [
-    "source=${localEnv:USERPROFILE}/.gitconfig,target=/root/.gitconfig,type=bind,consistency=cached",
-    "source=${localEnv:USERPROFILE}/.git-credentials,target=/root/.git-credentials,type=bind,consistency=cached",
-    "source=${localEnv:USERPROFILE}/.claude,target=/root/.claude,type=bind,consistency=cached",
+    "source=${localEnv:USERPROFILE}/.gitconfig,target=/home/vscode/.gitconfig,type=bind,consistency=cached",
+    "source=${localEnv:USERPROFILE}/.git-credentials,target=/home/vscode/.git-credentials,type=bind,consistency=cached",
+    "source=${localEnv:USERPROFILE}/.claude,target=/home/vscode/.claude,type=bind,consistency=cached",
   ],
   // "RunArgs": ["--env-file", "<PATH_TO_ENV_FILE>"]
   // "workspaceMount": "source=,target=,type=,consistency="

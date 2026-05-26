@@ -11,8 +11,9 @@ A custom development container template with pre-configured tools and settings. 
 
 ## Requirements
 
-- Docker for Desktop must be installed and running for the development container to work on Windows
 - moby set to false for docker-in-docker feature to work on Ubuntu
+- Docker for Desktop must be installed and running for the development container to work on Windows
+- To mount files from the host into the container, they must be added to Docker for Windows as a file sharing directory (Settings > Resources > File Sharing)
 
 ## Chosen Python tools
 
