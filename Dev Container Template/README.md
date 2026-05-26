@@ -1,8 +1,12 @@
 # Development Container Template
 
+---
+
 A custom development container template with pre-configured tools and settings. Built for use with Zed, but can be adapted for other editors.
 
 ## Helpful resources
+
+---
 
 - [Development Containers](https://containers.dev/)
 - [Dev Container JSON Reference](https://containers.dev/implementors/json_reference/)
@@ -11,10 +15,14 @@ A custom development container template with pre-configured tools and settings. 
 
 ## Requirements
 
+---
+
 - Docker for Desktop must be installed and running for the development container to work on Windows
 - moby set to false for docker-in-docker feature to work on Ubuntu
 
 ## Chosen Python tools
+
+---
 
 | Tool | Category | Description |
 |---|---|---|
@@ -31,11 +39,12 @@ A custom development container template with pre-configured tools and settings. 
 | pytest | Testing | Test runner and framework |
 | py-spy | Profiling | Sampling profiler, attaches to running processes |
 | PyInstaller | Distribution | Bundles app into standalone executable |
-| pyenv | Python versions | Fine-grained Python version switching |
 | Ruff | Lint + format | Replaces flake8 + isort + Black in one tool |
 | uv | Env + packages | Fast, modern Python/venv/package manager |
 
 ## Chosen Rust tools
+
+---
 
 | Tool | Category | Description |
 |---|---|---|
@@ -50,10 +59,25 @@ A custom development container template with pre-configured tools and settings. 
 
 ## Notes
 
+---
+
 - Ubuntu dev container image comes with Git, so no need to install it separately as a feature
 - Can specify mutliple postCreateCommands using `;` and `&&`
 - Docker Compose files used to run multiple dev container instances in parallel
 - `OnCreateCommand` cannot access user-defined assets or secrets, used when caching or prebuilding a container. `postCreateCommand` can access user-defined assets and secrets. Both are executed without a shell.
 - `workspaceFolder` sets the default working directory inside the container. `workspaceMount` mounts a host directory into the container, allowing for shared access between the host and container.
 - `mounts` can be used to connect additional directories into the container from the host
->>>>>>> 3d42ed9 (26-May-26: Devcontainer template finalised, NOTES.md updated to README.md)
+- `FeatureOptions` must either be a string or boolean, e.g.
+
+```json
+"features": {
+    "ghcr.io/devcontainers/features/common-utils": {
+        "installZsh": true,
+        "installOhMyZsh": true,
+        "ohMyZshTheme": "robbyrussell",
+        "username": ""
+    }
+}
+```
+
+- `overrideFeatureInstallOrder` used to guarantee a specific order of feature installation
