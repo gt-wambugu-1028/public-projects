@@ -1,12 +1,8 @@
 # Development Container Template
 
----
-
 A custom development container template with pre-configured tools and settings. Built for use with Zed, but can be adapted for other editors.
 
 ## Helpful resources
-
----
 
 - [Development Containers](https://containers.dev/)
 - [Dev Container JSON Reference](https://containers.dev/implementors/json_reference/)
@@ -15,14 +11,10 @@ A custom development container template with pre-configured tools and settings. 
 
 ## Requirements
 
----
-
 - Docker for Desktop must be installed and running for the development container to work on Windows
 - moby set to false for docker-in-docker feature to work on Ubuntu
 
 ## Chosen Python tools
-
----
 
 | Tool | Category | Description |
 |---|---|---|
@@ -44,8 +36,6 @@ A custom development container template with pre-configured tools and settings. 
 
 ## Chosen Rust tools
 
----
-
 | Tool | Category | Description |
 |---|---|---|
 | cargo | Build + packages | Build system and package manager |
@@ -58,8 +48,6 @@ A custom development container template with pre-configured tools and settings. 
 | rust-std | Standard library | Core types, traits, and APIs for compilation targets |
 
 ## Notes
-
----
 
 - Ubuntu dev container image comes with Git, so no need to install it separately as a feature
 - Can specify mutliple postCreateCommands using `;` and `&&`
