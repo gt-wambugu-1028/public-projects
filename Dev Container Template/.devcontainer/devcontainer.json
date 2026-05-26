@@ -20,20 +20,18 @@
     "ghcr.io/devcontainers/features/docker-in-docker:3": {
       "moby": false,
     },
-    "ghcr.io/anthropics/devcontainer-features/claude-code:1.0": {},
   },
   "overrideFeatureInstallOrder": [
     "ghcr.io/devcontainers/features/node:2",
     "ghcr.io/devcontainers/features/python:1",
     "ghcr.io/devcontainers/features/rust:1",
     "ghcr.io/devcontainers/features/docker-in-docker:3",
-    "ghcr.io/anthropics/devcontainer-features/claude-code:1.0",
   ],
   "forwardPorts": [443],
   "portsAttributes": {
     "443": { "label": "HTTPS", "onAutoForward": "silent" },
   },
-  "postCreateCommand": "bash .devcontainer/install.sh",
+  "postCreateCommand": "sudo apt install -y gh && uv tool install graphifyy && curl -fsSL https://raw.githubusercontent.com/JuliusBrussee/caveman/main/install.sh | bash",
   "postStartCommand": "sudo apt update && sudo apt upgrade",
   "mounts": [
     "source=${localEnv:USERPROFILE}/.gitconfig,target=/root/.gitconfig,type=bind,consistency=cached",
