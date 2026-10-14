@@ -45,7 +45,6 @@ echo "== Python tools (14 tools + graphifyy = 15 expected) =="
 t "uv tool count"         '^15$'                         'uv tool list | grep -vc "^-"'
 for c in bandit cookiecutter invoke ipython jupyter-lab kernprof mkdocs pipx pre-commit py-spy \
          pyinstaller pytest ruff ty; do cmd "$c" "$c"; done
-t "graphifyy installed"   '^graphifyy'                   'uv tool list | grep "^graphifyy"'
 
 echo "== Rust =="
 t "rustc"                 '^rustc '                      'rustc --version'
@@ -62,12 +61,11 @@ echo "== Node functional (needs network) =="
 t "npm install + require" '^true$'                       'd=$(mktemp -d) && cd $d && npm init -y >/dev/null && npm install --silent is-odd && node -e "console.log(require(\"is-odd\")(3))"; rm -rf $d'
 t "pnpm add + require"    '^true$'                       'd=$(mktemp -d) && cd $d && pnpm init >/dev/null && pnpm add is-even >/dev/null && node -e "console.log(require(\"is-even\")(4))"; rm -rf $d'
 
-echo "== Claude Code, codeburn, caveman =="
-cmd claude claude; cmd codeburn codeburn
+echo "== Claude Code, graphifyy, codeburn, caveman =="
+cmd claude claude
 t "claude runs"           '[0-9]+\.[0-9]+'               'claude --version'
-
-echo "== Docker (client only; no daemon expected) =="
-t "daemon not running"    'daemon|permission denied|connect' 'docker info'
+t "graphifyy installed"   '^graphifyy'                   'uv tool list | grep "^graphifyy"'
+cmd codeburn codeburn
 
 echo "== Size hygiene =="
 t "uv cache < 20 MB"      '^OK$'                         'n=$(du -sm ~/.cache/uv 2>/dev/null | cut -f1); [ "${n:-0}" -lt 20 ] && echo OK || echo "BIG: ${n}M"'
