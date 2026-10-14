@@ -18,7 +18,7 @@ t "NOT in docker group"   '^0$'                          'id -nG | tr " " "\n" |
 t "sudo needs password"   'password is required'         'sudo -n true'
 t "UV_PYTHON"             '^/usr/bin/python3$'           'echo $UV_PYTHON'
 t "NPM_CONFIG_PREFIX"     '^/home/ubuntu/\.npm-global$'  'echo $NPM_CONFIG_PREFIX'
-t "PATH has 3 user dirs"  '^3$'                          'echo $PATH | tr ":" "\n" | grep -cE "^/home/ubuntu/(\.npm-global/bin|\.cargo/bin|\.local/bin)$"'
+t "PATH has 3 user dirs"  '^3$'                          'echo $PATH | tr ":" "\n" | sort -u | grep -cE "^/home/ubuntu/(\.npm-global/bin|\.cargo/bin|\.local/bin)$"'
 
 echo "== apt package commands =="
 for c in batcat btop gcc g++ make curl docker dust eza fdfind fzf gh git delta jq lazygit less nano \
@@ -41,8 +41,8 @@ echo "== npm prefix =="
 t "npm prefix"            '^/home/ubuntu/\.npm-global$'  'npm config get prefix'
 t "pnpm in user prefix"   '^/home/ubuntu/\.npm-global/bin/pnpm$' 'command -v pnpm'
 
-echo "== Python tools (14 expected) =="
-t "uv tool count"         '^14$'                         'uv tool list | grep -vc "^-"'
+echo "== Python tools (14 tools + graphifyy = 15 expected) =="
+t "uv tool count"         '^15$'                         'uv tool list | grep -vc "^-"'
 for c in bandit cookiecutter invoke ipython jupyter-lab kernprof mkdocs pipx pre-commit py-spy \
          pyinstaller pytest ruff ty; do cmd "$c" "$c"; done
 t "graphifyy installed"   '^graphifyy'                   'uv tool list | grep "^graphifyy"'

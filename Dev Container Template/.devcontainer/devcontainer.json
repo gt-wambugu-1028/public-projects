@@ -5,19 +5,30 @@
       "dockerfile": "Dockerfile"
   },
   "shutdownAction": "stopContainer",
-  "forwardPorts": [443],
+  "forwardPorts": [443], // Ports in the container to forward to the host
+  // Per-port settings: label shown in the ports UI, and what happens when the port is auto-forwarded
   "portsAttributes": {
     "443": { "label": "HTTPS", "onAutoForward": "silent" },
   },
   "remoteUser": "ubuntu",
+  // Bind-mounts host files/folders into the container (host git config, git credentials and Claude settings)
   "mounts": [
     "source=${localEnv:USERPROFILE}/.gitconfig,target=/home/ubuntu/.gitconfig,type=bind,consistency=cached",
     "source=${localEnv:USERPROFILE}/.git-credentials,target=/home/ubuntu/.git-credentials,type=bind,consistency=cached",
     "source=${localEnv:USERPROFILE}/.claude,target=/home/ubuntu/.claude,type=bind,consistency=cached",
   ],
-  // "RunArgs": ["--env-file", "<PATH_TO_ENV_FILE>"]
+  // Extra `docker run` arguments, e.g. pass environment variables from a file (property name is case-sensitive: runArgs)
+  // "runArgs": ["--env-file", "<PATH_TO_ENV_FILE>"]
+  //
+  // Overrides how the project folder is mounted into the container (default: bind-mount of the opened folder)
   // "workspaceMount": "source=,target=,type=,consistency="
+  //
+  // Default folder opened inside the container; normally the target of workspaceMount
   // "workspaceFolder": "<workspaceMountTarget>",
+  //
+  // Docker Compose file(s) to use instead of build/image, to run multiple containers
   // "dockerComposeFile": "[<Docker Compose file path>]",
+  //
+  // Compose service the editor connects to (required with dockerComposeFile)
   // "service": "",
 }
