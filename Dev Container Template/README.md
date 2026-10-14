@@ -11,7 +11,6 @@ A custom development container template with pre-configured tools and settings. 
 
 ## Requirements
 
-- moby set to false for docker-in-docker feature to work on Ubuntu
 - Docker for Desktop must be installed and running for the development container to work on Windows
 - To mount files from the host into the container, they must be added to Docker for Windows as a file sharing directory (Settings > Resources > File Sharing)
 
@@ -71,3 +70,8 @@ A custom development container template with pre-configured tools and settings. 
 
 - `overrideFeatureInstallOrder` used to guarantee a specific order of feature installation
 - installing `uv` and `pyenv` as Python tools results in an error during feature installation - `pyenv` manages Python versions by compiling from source; `uv` has no concept of it and errors out when the python feature tries to install both via `uv`.
+
+# Setting the user password after container initialisation
+
+`docker ps --format "table {{.ID}}\t{{.Names}}\t{{.Image}}"` lists running containers as a table of ID, name and images
+`docker exec -it -u root <container-id-or-name> passwd ubuntu` runs passwd ubuntu as root inside that container, with an interactive terminal, to set the ubuntu user’s password.

@@ -1,0 +1,47 @@
+// devcontainer.json--v1.0
+{
+  // "name": "ubuntu_devcontainer",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "shutdownAction": "stopContainer",
+  "features": {
+    "ghcr.io/devcontainers/features/node:2": {
+      "npmVersion": "latest",
+      "installYarnUsingApt": true,
+    },
+    "ghcr.io/devcontainers/features/python:1": {
+      "version": "3.14",
+      "installTools": true,
+      "toolsToInstall": "uv,ruff,ty,pytest,py-spy,line_profiler,ipython,mkdocs,bandit,pre-commit,invoke,cookiecutter,pipx,pyinstaller",
+      "installJupyterlab": true,
+    },
+    "ghcr.io/devcontainers/features/rust:1": {
+      "components": "rustc,cargo,rustfmt,rust-std,rust-docs,rust-src,rust-analyzer,clippy",
+    },
+    "ghcr.io/devcontainers/features/docker-in-docker:3": {
+      "moby": false,
+    },
+  },
+  "overrideFeatureInstallOrder": [
+    "ghcr.io/devcontainers/features/node:2",
+    "ghcr.io/devcontainers/features/python:1",
+    "ghcr.io/devcontainers/features/rust:1",
+    "ghcr.io/devcontainers/features/docker-in-docker:3",
+  ],
+  "forwardPorts": [443],
+  "portsAttributes": {
+    "443": { "label": "HTTPS", "onAutoForward": "silent" },
+  },
+  // "remoteUser": "ubuntu",
+  "postCreateCommand": "npm install -g @anthropic-ai/claude-code && npm install -g codeburn && curl -fsSL https://raw.githubusercontent.com/JuliusBrussee/caveman/main/install.sh | bash && uv tool install graphifyy",
+  "postStartCommand": "sudo apt update && sudo apt upgrade",
+  "mounts": [
+    "source=${localEnv:USERPROFILE}/.gitconfig,target=/home/vscode/.gitconfig,type=bind,consistency=cached",
+    "source=${localEnv:USERPROFILE}/.git-credentials,target=/home/vscode/.git-credentials,type=bind,consistency=cached",
+    "source=${localEnv:USERPROFILE}/.claude,target=/home/vscode/.claude,type=bind,consistency=cached",
+  ],
+  // "RunArgs": ["--env-file", "<PATH_TO_ENV_FILE>"]
+  // "workspaceMount": "source=,target=,type=,consistency="
+  // "workspaceFolder": "<workspaceMountTarget>",
+  // "dockerComposeFile": "[<Docker Compose file path>]",
+  // "service": "",
+}
